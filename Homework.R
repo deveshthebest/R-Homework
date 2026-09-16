@@ -44,13 +44,8 @@ class(course_record)
 length(course_record)
 str(course_record)
 
-# A vector holds elements of one type in one dimension.
-# A factor stores categorical data as integers with labeled levels, and a matrix
-# is a 2-D structure where every element has the same type.
-# A list can hold objects of different types and structures.
-# A data frame is a list of equal-length columns, each of which can have its own type.
 
-# ---- Part B ----
+#  Part B 
 score_matrix["S04", "quiz2"]
 
 score_matrix[1:2, , drop = FALSE]
@@ -59,11 +54,8 @@ course_record["course"]
 course_record[["course"]]
 course_record$course
 
-# [ returns a subset of the same type, so a list stays a list.
-# [[ pulls out a single element itself.
-# $ works like [[ but uses the element name directly.
 
-# ---- Part C ----
+#  Part C 
 students$average <- rowMeans(students[, c("quiz1", "quiz2")])
 
 students$excellent <- students$average >= 90
@@ -75,8 +67,6 @@ sectionA_high
 avg_vec <- setNames(students$average, students$student_id)
 avg_vec
 
-# These are vectorized because rowMeans(), >=, ==, and & work on entire
-# columns at once instead of one element at a time in a loop.
 
 # Problem 2: Importing, cleaning, and summarizing data
 csv_text <- "sample_id,site,temp_c,ph,status
@@ -103,10 +93,7 @@ measurements_complete <- measurements[complete.cases(measurements), ]
 measurements_complete
 
 measurements$sample_id[!complete.cases(measurements)]
-# Removed: M02, M03, M06
 
-# x == NA doesn't work because comparing anything to NA gives NA, not TRUE
-# or FALSE, since the value is unknown. is.na(x) is the correct test.
 
 # Part B 
 measurements$site <- factor(measurements$site)
@@ -124,7 +111,6 @@ selected
 
 mean(measurements$temp_c, na.rm = TRUE)
 mean(measurements$temp_c[measurements$site == "South"], na.rm = TRUE)
-# Overall mean is about 20.36; South mean is about 20.47
 
 # Part C 
 A <- matrix(1:4, nrow = 2)
@@ -136,9 +122,7 @@ dim(A * B)
 A %*% B
 dim(A %*% B)
 
-# Both results are 2 x 2.
-# A * B multiplies matching positions (1*5, 2*6, 3*7, 4*8).
-# A %*% B is matrix multiplication: each entry is a row of A times a column of B.
+
 
 # Problem 3: Functions
 student_id <- paste0("P", sprintf("%02d", 1:8))
@@ -166,7 +150,6 @@ grade_one(90)
 grade_one(80)
 grade_one(85)
 grade_one(74)
-# Output: NA, "A", "B", "B", "C"
 
 #  Part B 
 grades <- rep(NA_character_, length(scores))
@@ -176,7 +159,6 @@ for (i in seq_along(scores)) {
 names(grades) <- student_id
 grades
 
-# i is the position (1 to 8) of the score being graded in each pass of the loop.
 
 #  Part C-1 
 summarize_scores <- function(x, na.rm = TRUE, digits = 1) {
@@ -192,7 +174,6 @@ summarize_scores <- function(x, na.rm = TRUE, digits = 1) {
 
 summarize_scores(scores)
 summarize_scores(x = scores, na.rm = TRUE, digits = 2)
-# Expected: total 8, missing 1, mean 79.43, sd 13.28, min 59, max 95
 
 # Part C-2 
 plot_scores <- function(x, ...) {
